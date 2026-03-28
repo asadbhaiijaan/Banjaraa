@@ -1,172 +1,54 @@
+
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Asad Bhaijaan Banjara Jadugar</title>
-  <style>
-    *{box-sizing:border-box}
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f3e8ff, #ffe4e6, #e0f2fe);
-      margin: 0;
-      padding: 20px;
-      overflow-x:hidden;
-    }
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-    .card {
-      background: rgba(255,255,255,0.95);
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-      backdrop-filter: blur(10px);
-    }
-    h1 {
-      font-size: 32px;
-      margin: 0 0 8px;
-    }
-    .subtitle{color:#666;margin-bottom:16px}
-    input, textarea, button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      font-size: 15px;
-    }
-    button {
-      background: linear-gradient(90deg,#7c3aed,#ec4899);
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: transform .2s;
-    }
-    button:hover{transform:scale(1.02)}
-    .app-box {
-      border: 1px solid #ddd;
-      border-radius: 14px;
-      padding: 12px;
-      margin-top: 10px;
-      background:#fafafa;
-    }
-    .preview-img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-top: 10px;
-      border: 1px solid #ccc;
-    }
-    .overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(135deg, rgba(124,58,237,.95), rgba(236,72,153,.95));
-      color:#fff;
-      z-index:999;
-      animation: fadeIn .7s ease;
-    }
-    .overlay-box{
-      text-align:center;
-      animation: popUp .8s ease;
-      padding:30px;
-    }
-    .overlay h2{font-size:48px;margin:0 0 10px}
-    .overlay p{font-size:24px;margin:0}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes popUp{from{transform:scale(.5) translateY(40px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
-    @media (max-width: 700px) {
-      .container { grid-template-columns: 1fr; }
-      .overlay h2{font-size:34px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asad Bhaijaan Banjara Jadugar</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#f3e8ff,#ffe4e6,#e0f2fe);margin:0;padding:20px;overflow-x:hidden}
+.container{max-width:1100px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:#fff;padding:24px;border-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+input,textarea,button{width:100%;padding:14px;margin-top:10px;border-radius:14px;border:1px solid #d4d4d8;font-size:15px;transition:.25s}
+input:focus,textarea:focus{outline:none;border-color:#7c3aed;transform:scale(1.01)}
+button{background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;font-weight:bold;border:none;cursor:pointer;animation:pulseBtn 2s infinite}
+button:hover{transform:scale(1.04)}
+.preview-img{width:100px;height:100px;object-fit:cover;border-radius:12px;margin-top:10px}
+.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(124,58,237,.95),rgba(236,72,153,.95));color:#fff;z-index:999}
+.overlay-box{text-align:center;animation:popUp .8s ease}
+@keyframes popUp{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes pulseBtn{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+@keyframes balloonUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-110vh);opacity:0}}
+</style>
 </head>
 <body>
 <div class="container">
-  <div class="card">
-    <h1>Asad Bhaijaan Banjara Jadugar</h1>
-    <div class="subtitle">Chaprassi Job Application Form ✨</div>
-    <form id="jobForm">
-      <input type="text" id="name" placeholder="Naam" required>
-      <input type="text" id="fatherName" placeholder="Father Name" required>
-      <textarea id="address" placeholder="Address" required></textarea>
-      <input type="text" id="aadhaar" placeholder="Aadhaar Number" maxlength="12" required>
-      <input type="tel" id="mobile" placeholder="Mobile Number" maxlength="10" required>
-      <label>Photo Upload</label>
-      <input type="file" id="photo" accept="image/*" required>
-      <img id="photoPreview" class="preview-img" style="display:none;" />
-      <label>12th Marksheet PDF</label>
-      <input type="file" id="marksheet" accept="application/pdf" required>
-      <button type="submit">Confirm & Submit</button>
-    </form>
-  </div>
-  <div class="card">
-    <h2>Owner Admin Panel</h2>
-    <div id="applications">Abhi koi application nahi aayi.</div>
-  </div>
-</div><div id="successOverlay" class="overlay">
-  <div class="overlay-box">
-    <h2 id="successName">Congratulations 🎉</h2>
-    <p>Form Successfully Submit Ho Gaya</p>
-  </div>
-</div><script>
-  const form = document.getElementById("jobForm");
-  const photoInput = document.getElementById("photo");
-  const photoPreview = document.getElementById("photoPreview");
-  const applications = document.getElementById("applications");
-  const overlay = document.getElementById("successOverlay");
-  const successName = document.getElementById("successName");
-
-  photoInput.addEventListener("change", function() {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        photoPreview.src = e.target.result;
-        photoPreview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const name = document.getElementById("name").value;
-    const fatherName = document.getElementById("fatherName").value;
-    const address = document.getElementById("address").value;
-    const aadhaar = document.getElementById("aadhaar").value;
-    const mobile = document.getElementById("mobile").value;
-    const imgSrc = photoPreview.src;
-
-    applications.innerHTML += `
-      <div class="app-box">
-        <p><b>Naam:</b> ${name}</p>
-        <p><b>Father Name:</b> ${fatherName}</p>
-        <p><b>Address:</b> ${address}</p>
-        <p><b>Aadhaar:</b> ${aadhaar}</p>
-        <p><b>Mobile:</b> ${mobile}</p>
-        <img src="${imgSrc}" class="preview-img" />
-      </div>`;
-
-    successName.innerText = `Congratulations, ${name}! 🎉`;
-    overlay.style.display = "flex";
-
-    setTimeout(() => {
-      overlay.style.display = "none";
-    }, 3000);
-
-    form.reset();
-    photoPreview.style.display = "none";
-    photoPreview.src = "";
-  });
-</script></body>
+<div class="card">
+<h1>Asad Bhaijaan Banjara Jadugar</h1>
+<form id="jobForm">
+<input type="text" id="name" placeholder="Name" required>
+<input type="text" id="fatherName" placeholder="Father Name" required>
+<textarea id="address" placeholder="Address" required></textarea>
+<input type="text" id="aadhaar" placeholder="Aadhaar Number" maxlength="12" required>
+<input type="tel" id="mobile" placeholder="Mobile Number" maxlength="10" required>
+<input type="file" id="photo" accept="image/*" required>
+<img id="photoPreview" class="preview-img" style="display:none;">
+<input type="file" id="marksheet" accept="application/pdf" required>
+<button type="submit">Confirm & Submit</button>
+</form>
+</div>
+<div class="card"><h2>Owner Admin Panel</h2><div id="applications">Abhi koi application nahi aayi.</div></div>
+</div>
+<div id="successOverlay" class="overlay"><div class="overlay-box"><h2 id="successName">Congratulations 🎉</h2></div></div>
+<script>
+const form=document.getElementById('jobForm');
+const photoInput=document.getElementById('photo');
+const photoPreview=document.getElementById('photoPreview');
+const applications=document.getElementById('applications');
+const overlay=document.getElementById('successOverlay');
+const successName=document.getElementById('successName');
+photoInput.addEventListener('change',function(){const f=this.files[0];if(f){const r=new FileReader();r.onload=e=>{photoPreview.src=e.target.result;photoPreview.style.display='block'};r.readAsDataURL(f)}});
+form.addEventListener('submit',function(e){e.preventDefault();const name=document.getElementById('name').value;applications.innerHTML += `<div><b>Name:</b> ${name}</div>`;successName.innerText=`Congratulations, Name: ${name}! 🎉`;overlay.style.display='flex';for(let i=0;i<8;i++){const b=document.createElement('div');b.innerText='🎈';b.style.position='fixed';b.style.left=(10+i*10)+'%';b.style.bottom='-20px';b.style.fontSize='32px';b.style.zIndex='1000';b.style.animation='balloonUp 3s linear forwards';document.body.appendChild(b);setTimeout(()=>b.remove(),3000)}setTimeout(()=>overlay.style.display='none',3000);form.reset();photoPreview.style.display='none';});
+</script>
+</body>
 </html>
