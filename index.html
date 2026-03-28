@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,13 +26,14 @@ body{
   box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
-input,textarea,button{
+input,textarea,button,label{
   width:100%;
   padding:14px;
   margin-top:10px;
   border-radius:14px;
   border:1px solid #ddd;
   box-sizing:border-box;
+  display:block;
 }
 
 button{
@@ -105,6 +107,12 @@ button{
       <textarea placeholder="Address" required></textarea>
       <input type="text" placeholder="Aadhaar Number" required>
       <input type="tel" placeholder="Mobile Number" required>
+
+      <label>12th Result / Marksheet Upload</label>
+      <input type="file" accept=".pdf,.doc,.docx" required>
+
+      <input type="url" placeholder="Google Drive / Google Docs Link">
+
       <button type="submit">Confirm & Submit</button>
     </form>
   </div>
