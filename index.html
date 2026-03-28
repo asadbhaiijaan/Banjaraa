@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Banjara Jadugar - Job Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f3e8ff, #ffe4e6);
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      background: #7c3aed;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    .app-box {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .preview-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+    }
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <h1>Banjara Jadugar</h1>
+    <h3>Chaprassi Job Application Form</h3>
+    <form id="jobForm">
+      <input type="text" id="name" placeholder="Naam" required>
+      <input type="text" id="fatherName" placeholder="Father Name" required>
+      <textarea id="address" placeholder="Address" required></textarea>
+      <input type="text" id="aadhaar" placeholder="Aadhaar Number" maxlength="12" required>
+      <input type="tel" id="mobile" placeholder="Mobile Number" maxlength="10" required>
+      <label>Photo Upload</label>
+      <input type="file" id="photo" accept="image/*" required>
+      <img id="photoPreview" class="preview-img" style="display:none;" />
+      <label>12th Marksheet PDF</label>
+      <input type="file" id="marksheet" accept="application/pdf" required>
+      <button type="submit">Confirm & Submit</button>
+    </form>
+    <div id="successMessage"></div>
+  </div>
+  <div class="card">
+    <h2>Owner Admin Panel</h2>
+    <div id="applications">Abhi koi application nahi aayi.</div>
+  </div>
+</div>
+<script>
+  const form = document.getElementById("jobForm");
+  const photoInput = document.getElementById("photo");
+  const photoPreview = document.getElementById("photoPreview");
+  const successMessage = document.getElementById("successMessage");
+  const applications = document.getElementById("applications");photoInput.addEventListener("change", function() { const file = this.files[0]; if (file) { const reader = new FileReader(); reader.onload = function(e) { photoPreview.src = e.target.result; photoPreview.style.display = "block"; }; reader.readAsDataURL(file); } });
+
+form.addEventListener("submit", function(event) { event.preventDefault(); const name = document.getElementById("name").value; const fatherName = document.getElementById("fatherName").value; const address = document.getElementById("address").value; const aadhaar = document.getElementById("aadhaar").value; const mobile = document.getElementById("mobile").value; const imgSrc = photoPreview.src;
+
+successMessage.innerHTML = "Congratulations, " + name + "! 🎉 Form successfully submit ho gaya.";
+
+applications.innerHTML += `
+  <div class="app-box">
+    <p><b>Naam:</b> ${name}</p>
+    <p><b>Father Name:</b> ${fatherName}</p>
+    <p><b>Address:</b> ${address}</p>
+    <p><b>Aadhaar:</b> ${aadhaar}</p>
+    <p><b>Mobile:</b> ${mobile}</p>
+    <img src="${imgSrc}" class="preview-img" />
+  </div>`;
+
+form.reset();
+photoPreview.style.display = "none";
+
+}); </script>
+
+</body>
+</html>
