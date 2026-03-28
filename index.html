@@ -13,24 +13,6 @@ body{
   overflow:hidden;
 }
 
-.floating-bg{
-  position:fixed;
-  inset:0;
-  z-index:-1;
-}
-
-.balloon{
-  position:absolute;
-  bottom:-60px;
-  font-size:35px;
-  animation: floatUp linear forwards;
-}
-
-@keyframes floatUp{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-110vh);opacity:0;}
-}
-
 .container{
   max-width:500px;
   margin:auto;
@@ -66,40 +48,53 @@ button{
   display:none;
   align-items:center;
   justify-content:center;
-  background:rgba(255,20,147,0.95);
-  color:white;
+  background:rgba(255,20,147,0.85);
   z-index:999;
+}
+
+.popup-box{
+  width:80%;
+  max-width:420px;
+  background:white;
+  color:#111;
   text-align:center;
+  padding:28px;
+  border-radius:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  animation: popIn .5s ease;
 }
 
-.overlay h1{
-  font-size:48px;
-  font-weight:900;
-  text-shadow:0 4px 10px rgba(0,0,0,0.25);
-  animation: popText 0.8s ease;
+.popup-box h2{
+  font-family: Georgia, serif;
+  font-size:28px;
+  margin-bottom:14px;
 }
 
-@keyframes popText{
-  from{transform:scale(0.5);opacity:0;}
+.popup-box p{
+  font-family: "Trebuchet MS", cursive;
+  font-size:20px;
+  line-height:1.5;
+}
+
+.ok-btn{
+  margin-top:20px;
+  padding:12px 22px;
+  border:none;
+  border-radius:12px;
+  background:#ff1493;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+@keyframes popIn{
+  from{transform:scale(0.7);opacity:0;}
   to{transform:scale(1);opacity:1;}
-}
-
-.overlay-balloon{
-  position:absolute;
-  bottom:-40px;
-  font-size:40px;
-  animation: flyCongrats 10s linear forwards;
-}
-
-@keyframes flyCongrats{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-110vh);opacity:0;}
 }
 </style>
 </head>
 <body>
-
-<div class="floating-bg" id="floatingBg"></div>
 
 <div class="container">
   <div class="card">
@@ -110,60 +105,34 @@ button{
       <textarea placeholder="Address" required></textarea>
       <input type="text" placeholder="Aadhaar Number" required>
       <input type="tel" placeholder="Mobile Number" required>
-      <input type="file" required>
-      <input type="file" required>
       <button type="submit">Confirm & Submit</button>
     </form>
   </div>
 </div>
 
 <div id="successOverlay" class="overlay">
-  <h1 id="successName"></h1>
+  <div class="popup-box">
+    <h2 id="successName"></h2>
+    <p>Thank You! Your Form Has Been Submitted To Asad</p>
+    <button class="ok-btn" onclick="closePopup()">OK</button>
+  </div>
 </div>
 
 <script>
 const overlay=document.getElementById("successOverlay");
 const successName=document.getElementById("successName");
 const form=document.getElementById("jobForm");
-const floatingBg=document.getElementById("floatingBg");
 
 form.addEventListener("submit",function(e){
   e.preventDefault();
-
   const name=document.getElementById("name").value;
   successName.innerText=`🎉 Congratulations ${name} 🎉`;
   overlay.style.display="flex";
-
-  for(let i=0;i<15;i++){
-    const balloon=document.createElement("div");
-    balloon.classList.add("overlay-balloon");
-    balloon.innerText="🎈";
-    balloon.style.left=Math.random()*100+"%";
-    overlay.appendChild(balloon);
-
-    setTimeout(()=>{balloon.remove();},10000);
-  }
-
-  setTimeout(()=>{
-    overlay.style.display="none";
-  },10000);
 });
 
-function createBalloon(){
-  const balloon=document.createElement("div");
-  balloon.classList.add("balloon");
-  balloon.innerText="🎈";
-  balloon.style.left=Math.random()*100+"%";
-  balloon.style.animationDuration=(4+Math.random()*3)+"s";
-
-  floatingBg.appendChild(balloon);
-
-  setTimeout(()=>{
-    balloon.remove();
-  },7000);
+function closePopup(){
+  overlay.style.display="none";
 }
-
-setInterval(createBalloon,500);
 </script>
 
 </body>
