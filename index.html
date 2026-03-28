@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,8 @@ body{
   background: linear-gradient(135deg,#ffb6c1,#ff69b4);
   margin:0;
   padding:20px;
-  overflow:hidden;
+  min-height:100vh;
+  overflow-y:auto;   /* fixed */
 }
 
 .container{
@@ -24,9 +24,10 @@ body{
   padding:25px;
   border-radius:25px;
   box-shadow:0 10px 20px rgba(0,0,0,0.15);
+  margin-bottom:30px;
 }
 
-input,textarea,button,label{
+input, textarea, button, label{
   width:100%;
   padding:14px;
   margin-top:10px;
@@ -34,6 +35,7 @@ input,textarea,button,label{
   border:1px solid #ddd;
   box-sizing:border-box;
   display:block;
+  font-size:16px;
 }
 
 button{
@@ -42,6 +44,11 @@ button{
   border:none;
   font-weight:bold;
   font-size:18px;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:0.9;
 }
 
 .overlay{
@@ -73,7 +80,6 @@ button{
 }
 
 .popup-box p{
-  font-family: "Trebuchet MS", cursive;
   font-size:20px;
   line-height:1.5;
 }
@@ -107,10 +113,13 @@ button{
       <textarea placeholder="Address" required></textarea>
       <input type="text" placeholder="Aadhaar Number" required>
       <input type="tel" placeholder="Mobile Number" required>
+
       <label>12th Result / Marksheet Upload</label>
       <input type="file" accept=".pdf,.doc,.docx" required>
+
       <label>Photo Upload</label>
-      <input type="file" accept=".pdf,.doc,.docx" required>
+      <input type="file" accept="image/*" required>
+
       <button type="submit">Confirm & Submit</button>
     </form>
   </div>
@@ -125,19 +134,19 @@ button{
 </div>
 
 <script>
-const overlay=document.getElementById("successOverlay");
-const successName=document.getElementById("successName");
-const form=document.getElementById("jobForm");
+const overlay = document.getElementById("successOverlay");
+const successName = document.getElementById("successName");
+const form = document.getElementById("jobForm");
 
-form.addEventListener("submit",function(e){
+form.addEventListener("submit", function(e){
   e.preventDefault();
-  const name=document.getElementById("name").value;
-  successName.innerText=`🎉 Congratulations ${name} 🎉`;
-  overlay.style.display="flex";
+  const name = document.getElementById("name").value;
+  successName.innerText = `🎉 Congratulations ${name} 🎉`;
+  overlay.style.display = "flex";
 });
 
 function closePopup(){
-  overlay.style.display="none";
+  overlay.style.display = "none";
 }
 </script>
 
