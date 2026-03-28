@@ -1,112 +1,101 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Asad Bhaijaan Banjara Jadugar</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, pink, #ff69b4, #ffc0cb);
-      margin: 0;
-      padding: 20px;
-      overflow: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asad Bhaijaan Banjara Jadugar</title>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ffb6c1,#ff69b4);
+  margin:0;
+  padding:20px;
+  overflow:hidden;
+}
 
-    .floating-bg {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-    }
+.floating-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
 
-    .float-item {
-      position: absolute;
-      bottom: -50px;
-      font-size: 28px;
-      animation: floatUp 6s linear infinite;
-    }
+.balloon{
+  position:absolute;
+  bottom:-60px;
+  font-size:35px;
+  animation: floatUp linear forwards;
+}
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-110vh);opacity:0;}
+}
 
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
+.container{
+  max-width:500px;
+  margin:auto;
+}
 
-    .card {
-      background: white;
-      padding: 24px;
-      border-radius: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
+.card{
+  background:white;
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
 
-    input, textarea, button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      border-radius: 14px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-    }
+input,textarea,button{
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  border-radius:14px;
+  border:1px solid #ddd;
+  box-sizing:border-box;
+}
 
-    button {
-      background: linear-gradient(90deg, #ff1493, #ff69b4);
-      color: white;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      animation: pulse 2s infinite;
-    }
+button{
+  background:#ff1493;
+  color:white;
+  border:none;
+  font-weight:bold;
+  font-size:18px;
+}
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-      100% { transform: scale(1); }
-    }
+.overlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,20,147,0.95);
+  color:white;
+  z-index:999;
+  text-align:center;
+}
 
-    .preview-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 12px;
-      margin-top: 10px;
-      object-fit: cover;
-    }
+.overlay h1{
+  font-size:48px;
+  font-weight:900;
+  text-shadow:0 4px 10px rgba(0,0,0,0.25);
+  animation: popText 0.8s ease;
+}
 
-    .overlay {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 20, 147, 0.95);
-      color: white;
-      z-index: 999;
-    }
+@keyframes popText{
+  from{transform:scale(0.5);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
 
-    .overlay-box {
-      text-align: center;
-      animation: popup 0.8s ease;
-    }
+.overlay-balloon{
+  position:absolute;
+  bottom:-40px;
+  font-size:40px;
+  animation: flyCongrats 10s linear forwards;
+}
 
-    @keyframes popup {
-      from { transform: scale(0.5); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-  </style>
+@keyframes flyCongrats{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-110vh);opacity:0;}
+}
+</style>
 </head>
 <body>
 
@@ -115,91 +104,66 @@
 <div class="container">
   <div class="card">
     <h1>Asad Bhaijaan Banjara Jadugar</h1>
-
     <form id="jobForm">
       <input type="text" id="name" placeholder="Name" required>
-      <input type="text" id="fatherName" placeholder="Father Name" required>
-      <textarea id="address" placeholder="Address" required></textarea>
-      <input type="text" id="aadhaar" placeholder="Aadhaar Number" maxlength="12" required>
-      <input type="tel" id="mobile" placeholder="Mobile Number" maxlength="10" required>
-
-      <input type="file" id="photo" accept="image/*" required>
-      <img id="photoPreview" class="preview-img" style="display:none;">
-
-      <input type="file" id="marksheet" accept="application/pdf" required>
-
+      <input type="text" placeholder="Father Name" required>
+      <textarea placeholder="Address" required></textarea>
+      <input type="text" placeholder="Aadhaar Number" required>
+      <input type="tel" placeholder="Mobile Number" required>
+      <input type="file" required>
+      <input type="file" required>
       <button type="submit">Confirm & Submit</button>
     </form>
-  </div>
-
-  <div class="card">
-    <h2>Owner Admin Panel</h2>
-    <div id="applications">Abhi koi application nahi aayi.</div>
   </div>
 </div>
 
 <div id="successOverlay" class="overlay">
-  <div class="overlay-box">
-    <h2 id="successName">Congratulations 🎉</h2>
-  </div>
+  <h1 id="successName"></h1>
 </div>
 
 <script>
-  const form = document.getElementById("jobForm");
-  const photoInput = document.getElementById("photo");
-  const photoPreview = document.getElementById("photoPreview");
-  const applications = document.getElementById("applications");
-  const overlay = document.getElementById("successOverlay");
-  const successName = document.getElementById("successName");
-  const floatingBg = document.getElementById("floatingBg");
+const overlay=document.getElementById("successOverlay");
+const successName=document.getElementById("successName");
+const form=document.getElementById("jobForm");
+const floatingBg=document.getElementById("floatingBg");
 
-  photoInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        photoPreview.src = e.target.result;
-        photoPreview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+form.addEventListener("submit",function(e){
+  e.preventDefault();
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+  const name=document.getElementById("name").value;
+  successName.innerText=`🎉 Congratulations ${name} 🎉`;
+  overlay.style.display="flex";
 
-    const name = document.getElementById("name").value;
+  for(let i=0;i<15;i++){
+    const balloon=document.createElement("div");
+    balloon.classList.add("overlay-balloon");
+    balloon.innerText="🎈";
+    balloon.style.left=Math.random()*100+"%";
+    overlay.appendChild(balloon);
 
-    applications.innerHTML += `<div><b>Name:</b> ${name}</div>`;
-
-    successName.innerText = `Congratulations, Name: ${name}! 🎉`;
-    overlay.style.display = "flex";
-
-    setTimeout(() => {
-      overlay.style.display = "none";
-    }, 3000);
-
-    form.reset();
-    photoPreview.style.display = "none";
-  });
-
-  function createFloatingItems() {
-    const symbols = ["💖", "🎈", "💕", "🎀"];
-    const item = document.createElement("div");
-
-    item.classList.add("float-item");
-    item.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    item.style.left = Math.random() * 100 + "%";
-    item.style.animationDuration = (4 + Math.random() * 4) + "s";
-
-    floatingBg.appendChild(item);
-
-    setTimeout(() => {
-      item.remove();
-    }, 7000);
+    setTimeout(()=>{balloon.remove();},10000);
   }
 
-  setInterval(createFloatingItems, 700);
+  setTimeout(()=>{
+    overlay.style.display="none";
+  },10000);
+});
+
+function createBalloon(){
+  const balloon=document.createElement("div");
+  balloon.classList.add("balloon");
+  balloon.innerText="🎈";
+  balloon.style.left=Math.random()*100+"%";
+  balloon.style.animationDuration=(4+Math.random()*3)+"s";
+
+  floatingBg.appendChild(balloon);
+
+  setTimeout(()=>{
+    balloon.remove();
+  },7000);
+}
+
+setInterval(createBalloon,500);
 </script>
 
 </body>
